@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
+import nanoid from "nanoid"
 
-export default function Results() {
-
-    
+export default function Results({inputValue}) {
     // Fetch Data & Set State
     useEffect(() => {
         fetchData();
@@ -15,14 +14,21 @@ export default function Results() {
         }
     }, [])
     
-// Set inital State
+    // Set initalState
     const [data, setData] = useState([]);
+    const shoppingNames =  data?.data?.map((items) => {
+        return items.name.de
+    })
+
+   
 
   return (
     <List>
-      {data?.data?.map((items) => {
-        return <ListItem>{items.name.de}</ListItem>;
-      })}
+      <ListItem>
+        {shoppingNames?.filter((name) => {
+          return name === inputValue;
+        })}
+      </ListItem>
     </List>
   );
 }
