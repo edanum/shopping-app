@@ -1,27 +1,40 @@
 import "./App.css";
-import Results from "./components/Results";
+import Suggestions from "./components/Suggestions";
 import { useEffect, useState } from "react";
 import { SearchBar } from "./components/Searchbar";
 import { Header } from "./components/Header";
+import { ActiveItems } from "./components/ActiveItems";
 
 function App() {
   const [inputValue, setInputValue] = useState();
-
-  useEffect(() => {
-    console.log(inputValue);
-  }, []);
+  const [activeItems, setActiveItems] = useState([]);
 
   function handleInputValue(e) {
-    const inputLowerCase = e.target.value.toLowerCase()
+    const inputLowerCase = e.target.value.toLowerCase();
     setInputValue(inputLowerCase);
     console.log(inputValue);
+  }
+
+  function addItemToActiveList(item) {
+    setActiveItems([...activeItems, item]);
   }
 
   return (
     <div className="App">
       <Header />
-      <SearchBar handleInputValue={handleInputValue} />
-      <Results inputValue={inputValue} />
+      <SearchBar
+        handleInputValue={handleInputValue}
+        activeItems={activeItems}
+        setActiveItems={setActiveItems}
+        inputValue = {inputValue}
+      />
+      <Suggestions
+        inputValue={inputValue}
+        addItemToActiveList={addItemToActiveList}
+        handleInputValue={handleInputValue}
+        
+      />
+      <ActiveItems activeItems={activeItems} />
     </div>
   );
 }
