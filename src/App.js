@@ -12,7 +12,8 @@ function App() {
   }, []);
 
   function handleInputValue(e) {
-    setInputValue(e.target.value);
+    const inputLowerCase = e.target.value.toLowerCase()
+    setInputValue(inputLowerCase);
     console.log(inputValue);
   }
 

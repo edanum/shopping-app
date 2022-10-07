@@ -16,18 +16,33 @@ export default function Results({inputValue}) {
     
     // Set initalState
     const [data, setData] = useState([]);
+
+    //Reduce Data to names only array
     const shoppingNames =  data?.data?.map((items) => {
         return items.name.de
     })
+
+    //Create Array with filtered Data
+
+    const filteredShoppingNames = shoppingNames?.filter((name) => {
+        if (inputValue === name) {
+          return name
+        }
+        else{
+          return name.toLowerCase().includes(inputValue)
+        }
+    });
+
+    console.log(filteredShoppingNames);
 
    
 
   return (
     <List>
       <ListItem>
-        {shoppingNames?.filter((name) => {
-          return name === inputValue;
-        })}
+        {filteredShoppingNames?.map((item) => (
+          <li>{item}</li>
+        ))}
       </ListItem>
     </List>
   );
