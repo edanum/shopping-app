@@ -19,6 +19,10 @@ function App() {
     setActiveItems([...activeItems, item]);
   }
 
+  function clearActiveList() {
+    setActiveItems([]);
+  }
+
   return (
     <div className="App">
       <Header />
@@ -26,15 +30,17 @@ function App() {
         handleInputValue={handleInputValue}
         activeItems={activeItems}
         setActiveItems={setActiveItems}
-        inputValue = {inputValue}
+        inputValue={inputValue}
       />
       <Suggestions
         inputValue={inputValue}
         addItemToActiveList={addItemToActiveList}
         handleInputValue={handleInputValue}
-        
       />
-      <ActiveItems activeItems={activeItems} />
+      <ActiveItems
+        activeItems={activeItems}
+        clearActiveList={clearActiveList}
+      />
     </div>
   );
 }

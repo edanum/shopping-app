@@ -1,16 +1,29 @@
 import styled from "styled-components";
+import { useState } from "react";
 
-export function ActiveItems({ activeItems }) {
-  return (
+export function ActiveItems({ activeItems,clearActiveList }) {
+    const [toggled, setToggled] = useState(false);
+    
+    function handleClear() {
+        clearActiveList();
+    }
+    
+    function handleToggle() {
+        
+    }
+  
+    return (
     <>
-      <Subheader>My List:</Subheader>
+          <Subheader>My List:</Subheader>
+          <button onClick={handleClear}>Clear List</button>
       <List>
         {activeItems.map((item) => {
           return (
-            <ListItem>
-              <Checkbox type="checkbox" />
-              {item}
-            </ListItem>
+      
+              <ListItem onClick={handleToggle}>
+                {item}
+              </ListItem>
+            
           );
         })}
       </List>
@@ -35,7 +48,7 @@ const List = styled.ul`
   border-radius: 20px;
 `;
 
-const ListItem = styled.li`
+const ListItem = styled.button`
   
   display: flex;
   justify-content: flex-start;
@@ -48,6 +61,10 @@ const ListItem = styled.li`
   padding: 20px;
   border-radius: 10px;
   font-size: 24px;
+
+  &:active{
+    background-color: black;
+  }
 `;
 
 const Checkbox = styled.input`
