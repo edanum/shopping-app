@@ -48,6 +48,7 @@ export function ActiveItems({
                 {language === "de" ? item.de : item.en}
               </ListItem>
               <DeleteButton
+                key={Math.random()}
                 onClick={() => handleDelete(item)}
                 toggled={item.toggled}
               >
@@ -67,7 +68,6 @@ const Subheader = styled.h2`
 `;
 
 const List = styled.ul`
-  
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -76,7 +76,6 @@ const List = styled.ul`
   width: 80%;
   padding: 20px 20px 20px 20px;
   border-radius: 20px;
-  
 `;
 
 const ListItem = styled.button`

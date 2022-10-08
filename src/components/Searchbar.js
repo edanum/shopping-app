@@ -12,16 +12,16 @@ export function SearchBar({ handleInputValue, setLanguage, language }) {
 
   function handleLanguageEnglish() {
     setLanguage("en");
-    setToggleEnglish(!toggledEnglish);
-    setToggleGerman(!toggledGerman);
+    setToggleEnglish(true);
+    setToggleGerman(false);
 
     console.log("Language set to english");
   }
 
   function handleLanguageGerman() {
     setLanguage("de");
-    setToggleGerman(!toggledGerman);
-    setToggleEnglish(!toggledEnglish);
+    setToggleGerman(true);
+    setToggleEnglish(false);
 
     console.log("Language set to german");
   }
