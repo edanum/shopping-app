@@ -9,7 +9,6 @@ function App() {
   const [inputValue, setInputValue] = useState();
   const [activeItems, setActiveItems] = useState([]);
   const [language, setLanguage] = useState("de");
-  
 
   function handleInputValue(e) {
     const inputLowerCase = e.target.value.toLowerCase();
@@ -17,16 +16,18 @@ function App() {
   }
 
   function addItemToActiveList(item) {
+    //  {id: 'c2hvcHBpbmcuaXRlbTo2', de: 'Austernpilze', en: 'Oyster mushrooms'}
+
     setActiveItems([...activeItems, item]);
-    console.log("added following item to list:")
-    console.log(item)
   }
 
   function deleteItemFromActiveList(item) {
-    setActiveItems(activeItems.filter(item => {
-    return item === item ? "" : item
-  }))
-}
+    setActiveItems(
+      activeItems.filter((item) => {
+        return item === item ? "" : item;
+      })
+    );
+  }
 
   function clearActiveList() {
     setActiveItems([]);
@@ -49,6 +50,7 @@ function App() {
         activeItems={activeItems}
         clearActiveList={clearActiveList}
         deleteItemFromActiveList={deleteItemFromActiveList}
+        language={language}
       />
     </div>
   );

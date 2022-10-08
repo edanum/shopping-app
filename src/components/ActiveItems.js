@@ -5,6 +5,7 @@ export function ActiveItems({
   activeItems,
   clearActiveList,
   deleteItemFromActiveList,
+  language,
 }) {
   function handleClear() {
     clearActiveList();
@@ -12,8 +13,8 @@ export function ActiveItems({
 
   function handleToggle() {}
 
-    function handleDelete(item) {
-      deleteItemFromActiveList(item);
+  function handleDelete(item) {
+    deleteItemFromActiveList(item);
   }
 
   return (
@@ -24,7 +25,7 @@ export function ActiveItems({
         {activeItems.map((item) => {
           return (
             <ListItem onClick={handleToggle}>
-              {item}
+              {language==="de" ? item.de : item.en}
               <DeleteButton onClick={handleDelete}>X</DeleteButton>
             </ListItem>
           );
@@ -72,12 +73,10 @@ const Checkbox = styled.input`
 `;
 
 const DeleteButton = styled.button`
-    background-color: #ffffff00;
-  color: #FFFFFF;
+  background-color: #ffffff00;
+  color: #ffffff;
   border-radius: 50%;
   font-size: 20px;
   width: 40px;
   height: 40px;
-  
-  
 `;
