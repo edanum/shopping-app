@@ -48,6 +48,7 @@ function App() {
         return item.id === e.id ? "" : item;
       })
     );
+    setSelectableItems([...selectableItems,item])
   }
 
   function clearActiveList() {
