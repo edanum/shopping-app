@@ -1,23 +1,45 @@
 import styled from "styled-components";
 
-export function SearchBar({ handleInputValue }) {
+export function SearchBar({ handleInputValue, setLanguage }) {
   function handleSubmit(e) {
-      e.preventDefault();
-      e.target.reset();
-    return console.log("Submit gedrückt");
+    e.preventDefault();
+    e.target.reset();
+  }
+
+  function handleLanguageEnglish() {
+    setLanguage("en");
+    console.log("Language set to english");
+  }
+
+  function handleLanguageGerman() {
+    setLanguage("de");
+    console.log("Language set to german");
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Searchbar
-        type="text"
-        onChange={handleInputValue}
-        placeholder="type item here..."
-      />
-      <Button type="submit">Add Item</Button>
-    </Form>
+    <>
+      <Bar>
+        <button onClick={handleLanguageEnglish}>EN</button>/
+        <button onClick={handleLanguageGerman}>DE</button>
+        <Form onSubmit={handleSubmit}>
+          <Inputfield
+            type="text"
+            onChange={handleInputValue}
+            placeholder="type item here..."
+          />
+          <Button type="submit">Add Item</Button>
+        </Form>
+      </Bar>
+    </>
   );
 }
+
+const Bar = styled.div`
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Button = styled.button`
   background-color: #2a637c;
@@ -34,7 +56,7 @@ const Form = styled.form`
   align-items: center;
 `;
 
-const Searchbar = styled.input`
+const Inputfield = styled.input`
   width: 370px;
   height: 40px;
   font-size: 30px;

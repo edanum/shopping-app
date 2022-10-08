@@ -8,16 +8,25 @@ import { ActiveItems } from "./components/ActiveItems";
 function App() {
   const [inputValue, setInputValue] = useState();
   const [activeItems, setActiveItems] = useState([]);
+  const [language, setLanguage] = useState("de");
+  
 
   function handleInputValue(e) {
     const inputLowerCase = e.target.value.toLowerCase();
     setInputValue(inputLowerCase);
-    console.log(inputValue);
   }
 
   function addItemToActiveList(item) {
     setActiveItems([...activeItems, item]);
+    console.log("added following item to list:")
+    console.log(item)
   }
+
+  function deleteItemFromActiveList(item) {
+    setActiveItems(activeItems.filter(item => {
+    return item === item ? "" : item
+  }))
+}
 
   function clearActiveList() {
     setActiveItems([]);
@@ -28,18 +37,18 @@ function App() {
       <Header />
       <SearchBar
         handleInputValue={handleInputValue}
-        activeItems={activeItems}
-        setActiveItems={setActiveItems}
-        inputValue={inputValue}
+        setLanguage={setLanguage}
       />
       <Suggestions
         inputValue={inputValue}
         addItemToActiveList={addItemToActiveList}
         handleInputValue={handleInputValue}
+        language={language}
       />
       <ActiveItems
         activeItems={activeItems}
         clearActiveList={clearActiveList}
+        deleteItemFromActiveList={deleteItemFromActiveList}
       />
     </div>
   );

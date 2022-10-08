@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import nanoid from "nanoid";
-import { ActiveItems } from "./ActiveItems";
 
-export default function Results({ inputValue, addItemToActiveList}) {
+export default function Results({ inputValue, addItemToActiveList, language }) {
   // Fetch Data & Set State
   useEffect(() => {
     fetchData();
@@ -15,38 +13,42 @@ export default function Results({ inputValue, addItemToActiveList}) {
     }
   }, []);
 
-  // Set initalState
+  // Set initalState (empty array)
   const [data, setData] = useState([]);
 
   //Reduce Data to names only array
-  const shoppingNames = data?.data?.map((items) => {
-    return items.name.de;
+  const shoppingNames = data?.data?.map((item) => {
+    return { id: item._id, de: item.name["de"], en: item.name["en"] };
   });
-
+  console.log("Aktuelle shopping Names");
+  console.log(shoppingNames);
   //Create Suggestions
 
-  const filteredShoppingNames = shoppingNames?.filter((name) => {
+  const filteredShoppingNames = shoppingNames?.filter((item) => {
     if (inputValue === "") {
       return "";
     }
-    if (inputValue === name) {
-      return name;
+    if (inputValue === item.de) {
+      return item?.de;
     } else {
-      return name.toLowerCase().includes(inputValue);
+      return item?.de.toLowerCase().includes(inputValue);
     }
   });
 
-  // Handle Click on Suggestions
-    function clickHandle(item) {
-      addItemToActiveList(item);
-  }
+  console.log("Filtert noch und bricht erst beim Rendern ab")
+  console.log(filteredShoppingNames)
 
-  console.log(filteredShoppingNames);
+  // Handle Click on Suggestions
+  function clickHandle(item) {
+    addItemToActiveList(item);
+  }
 
   return (
     <Suggestions>
       {filteredShoppingNames?.map((item) => (
-        <SuggestionsItem onClick={() => clickHandle(item)}>{item}</SuggestionsItem>
+        <SuggestionsItem key={Math.random()} onClick={() => clickHandle(item)}>
+          {language==="de" ? item.de : item.en}
+        </SuggestionsItem>
       ))}
     </Suggestions>
   );
@@ -68,7 +70,7 @@ const SuggestionsItem = styled.button`
   border-radius: 10px;
   padding: 15px;
 
-  &:hover{
+  &:hover {
     background-color: #94a9ba;
     transition: 0.1s ease-in;
   }
