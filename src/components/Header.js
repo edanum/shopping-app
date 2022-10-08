@@ -6,4 +6,5 @@ export function Header({language}) {
 
 const Heading = styled.h1`
  margin: 0px 0px 20px 0px;
+ text-decoration: underline 2px #281470;
 `;

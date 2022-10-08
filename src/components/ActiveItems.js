@@ -28,7 +28,7 @@ export function ActiveItems({
       ) : (
         <>
           <Subheader>
-            {language === "en" ? "My List:" : "Meine Liste"}
+            {language === "en" ? "My List:" : "Meine Einkaufsliste"}
           </Subheader>
           <button onClick={handleClear}>
             {language === "en" ? "Clear list" : "Liste löschen"}
@@ -63,6 +63,7 @@ export function ActiveItems({
 
 const Subheader = styled.h2`
   font-size: 30px;
+  margin-top: 50px;
 `;
 
 const List = styled.ul`
@@ -91,6 +92,7 @@ const ListItem = styled.button`
   border-radius: 10px;
   font-size: 24px;
   font-style: ${(props) => (props.toggled ? "italic" : "normal")};
+  text-decoration: ${(props) => (props.toggled ? "line-through" : "none")};
   border: none;
 `;
 

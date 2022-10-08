@@ -80,6 +80,7 @@ const Form = styled.form`
   display: flex;
   gap: 20px;
   width: 100%;
+  max-width: 700px;
   justify-content: center;
   align-items: center;
 `;
@@ -90,6 +91,7 @@ const Inputfield = styled.input`
   font-size: 20px;
   border-radius: 15px;
   text-align: center;
+  
 `;
 
 const LanguageSection = styled.section`
