@@ -24,8 +24,8 @@ export function ActiveItems({
       <List>
         {activeItems.map((item) => {
           return (
-            <ListItem onClick={handleToggle}>
-              {language==="de" ? item.de : item.en}
+            <ListItem key={item.id} onClick={handleToggle}>
+              {language === "de" ? item.de : item.en}
               <DeleteButton onClick={handleDelete}>X</DeleteButton>
             </ListItem>
           );

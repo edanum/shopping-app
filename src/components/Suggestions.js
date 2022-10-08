@@ -1,27 +1,18 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
-export default function Results({ inputValue, addItemToActiveList, language }) {
-  // Fetch Data & Set State
-  useEffect(() => {
-    fetchData();
-    async function fetchData() {
-      const url = "https://fetch-me.vercel.app/api/shopping/items";
-      const response = await fetch(url);
-      const result = await response.json();
-      setData(result);
-    }
-  }, []);
-
-  // Set initalState (empty array)
-  const [data, setData] = useState([]);
-
+export default function Results({
+  inputValue,
+  addItemToActiveList,
+  language,
+  selectableItems,
+  setSelectableItems,
+}) {
   //Reduce Data to names only array
-  const shoppingNames = data?.data?.map((item) => {
+  const shoppingNames = selectableItems?.data?.map((item) => {
     return { id: item._id, de: item.name["de"], en: item.name["en"] };
   });
-  console.log("Aktuelle shopping Names");
-  console.log(shoppingNames);
+
   //Create Suggestions
 
   const filteredShoppingNames = shoppingNames?.filter((item) => {
@@ -35,9 +26,6 @@ export default function Results({ inputValue, addItemToActiveList, language }) {
     }
   });
 
-  console.log("Filtert noch und bricht erst beim Rendern ab")
-  console.log(filteredShoppingNames)
-
   // Handle Click on Suggestions
   function clickHandle(item) {
     addItemToActiveList(item);
@@ -45,9 +33,12 @@ export default function Results({ inputValue, addItemToActiveList, language }) {
 
   return (
     <Suggestions>
+      {console.log("selectable Items kurz vorm Rendern")}
+      {console.log(selectableItems)}
+
       {filteredShoppingNames?.map((item) => (
         <SuggestionsItem key={Math.random()} onClick={() => clickHandle(item)}>
-          {language==="de" ? item.de : item.en}
+          {language === "de" ? item.de : item.en}
         </SuggestionsItem>
       ))}
     </Suggestions>
@@ -60,7 +51,7 @@ const Suggestions = styled.div`
   list-style: none;
   gap: 10px;
   justify-content: center;
-  
+
   margin-top: 20px;
 `;
 

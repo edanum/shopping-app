@@ -7,18 +7,31 @@ import { ActiveItems } from "./components/ActiveItems";
 
 function App() {
   const [inputValue, setInputValue] = useState();
+  const [allItems, setAllItems] = useState();
   const [activeItems, setActiveItems] = useState([]);
   const [language, setLanguage] = useState("de");
+  const [selectableItems, setSelectableItems] = useState();
 
+  // Fetch Data & Set State
+  useEffect(() => {
+    fetchData();
+    async function fetchData() {
+      const url = "https://fetch-me.vercel.app/api/shopping/items";
+      const response = await fetch(url);
+      const result = await response.json();
+      setSelectableItems(result);
+    }
+  }, []);
+
+  
   function handleInputValue(e) {
     const inputLowerCase = e.target.value.toLowerCase();
     setInputValue(inputLowerCase);
   }
 
   function addItemToActiveList(item) {
-    //  {id: 'c2hvcHBpbmcuaXRlbTo2', de: 'Austernpilze', en: 'Oyster mushrooms'}
-
     setActiveItems([...activeItems, item]);
+    removeItemFromSearchList(item);
   }
 
   function deleteItemFromActiveList(item) {
@@ -33,6 +46,11 @@ function App() {
     setActiveItems([]);
   }
 
+  function removeItemFromSearchList(item) {
+    // Item: {id: 'c2hvcHBpbmcuaXRlbTo2', de: 'Austernpilze', en: 'Oyster mushrooms'}
+    return console.log(selectableItems.data);
+  }
+
   return (
     <div className="App">
       <Header />
@@ -43,8 +61,9 @@ function App() {
       <Suggestions
         inputValue={inputValue}
         addItemToActiveList={addItemToActiveList}
-        handleInputValue={handleInputValue}
         language={language}
+        selectableItems={selectableItems}
+        setSelectableItems={setSelectableItems}
       />
       <ActiveItems
         activeItems={activeItems}
