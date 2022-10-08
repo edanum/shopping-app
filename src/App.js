@@ -4,15 +4,14 @@ import { useEffect, useState } from "react";
 import { SearchBar } from "./components/Searchbar";
 import { Header } from "./components/Header";
 import { ActiveItems } from "./components/ActiveItems";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 function App() {
   //___________ STATES__________
   const [inputValue, setInputValue] = useState();
   const [allItems, setAllItems] = useState();
-  const [activeItems, setActiveItems] = useState(
-    JSON.parse(localStorage.getItem("items") )
-  );
-  const [language, setLanguage] = useState("de");
+  const [activeItems, setActiveItems] = useLocalStorage("activeItems",[]  );
+  const [language, setLanguage] = useLocalStorage("language","de");
   const [selectableItems, setSelectableItems] = useState();
 
   //___________INITIALIZING DATA__________
@@ -42,13 +41,14 @@ function App() {
     localStorage.setItem("items", JSON.stringify(activeItems));
   }, [activeItems]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("language", JSON.stringify(language));
-  // }, [language]);
+  useEffect(() => {
+    localStorage.setItem("language", JSON.stringify(language));
+    console.log("SPRACHE GESPEICHERT")
+  }, [language]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("items", JSON.stringify(selectableItems));
-  // }, [selectableItems]);
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(selectableItems));
+  }, [selectableItems]);
 
   //___________COMPONENT FUNCTIONS_________
   function handleInputValue(e) {
