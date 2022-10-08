@@ -25,7 +25,6 @@ function App() {
 
   // set up the data to be shown on filtering in Suggestions.js
   useEffect(() => {
-    //Reduce Data to names only array
     setSelectableItems(
       allItems?.data?.map((item) => {
         return { id: item._id, de: item.name["de"], en: item.name["en"] };

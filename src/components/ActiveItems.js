@@ -12,10 +12,9 @@ export function ActiveItems({
     clearActiveList();
   }
 
-  function handleToggle(item) {
-    console.log(item);
-    item.toggled = true;
-    console.log(item);
+  function handleToggleShopped(item) {
+    item.toggled === false ? (item.toggled = true) : (item.toggled = false);
+    setActiveItems([...activeItems]);
   }
 
   function handleDelete(item) {
@@ -31,10 +30,21 @@ export function ActiveItems({
       <List>
         {activeItems.map((item) => {
           return (
-            <ListItem key={item.id} onClick={() => handleToggle(item)}>
-              {language === "de" ? item.de : item.en}
-              <DeleteButton onClick={() => handleDelete(item)}>X</DeleteButton>
-            </ListItem>
+            <ListItemContainer toggled={item.toggled}>
+              <ListItem
+                key={item.id}
+                onClick={() => handleToggleShopped(item)}
+                toggled={item.toggled}
+              >
+                {language === "de" ? item.de : item.en}
+              </ListItem>
+              <DeleteButton
+                onClick={() => handleDelete(item)}
+                toggled={item.toggled}
+              >
+                X
+              </DeleteButton>
+            </ListItemContainer>
           );
         })}
       </List>
@@ -63,27 +73,35 @@ const ListItem = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #6c82b5;
-  color: #fbf4f4;
+  background-color: ${(props) => (props.toggled ? "#c3c3c3" : "#6c82b5")};
+  color: ${(props) => (props.toggled ? "#838080" : "#f6f6f6")};
   list-style: none;
-  width: 90%;
+  width: 100%;
   margin: 0px;
   padding: 10px;
   border-radius: 10px;
   font-size: 24px;
+  font-style: ${(props) => (props.toggled ? "italic" : "normal")};
+  border: none;
 `;
 
-const Checkbox = styled.input`
-  margin-right: 30px;
-  width: 50px;
-  height: 30px;
+const ListItemContainer = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: black;
+  width: 90%;
+  border-radius: 10px;
+  background-color: ${(props) => (props.toggled ? "#c3c3c3" : "#6c82b5")};
+  border: solid 1px #4a4949;
 `;
 
 const DeleteButton = styled.button`
   background-color: #ffffff00;
-  color: #ffffff;
+  color: ${(props) => (props.toggled ? "#838080" : "#f6f6f6")};
   border-radius: 50%;
   font-size: 20px;
   width: 40px;
   height: 40px;
+  z-index: 2;
+  margin-right: 10px;
 `;
