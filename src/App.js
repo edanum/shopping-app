@@ -6,12 +6,16 @@ import { Header } from "./components/Header";
 import { ActiveItems } from "./components/ActiveItems";
 
 function App() {
+  //___________ STATES__________
   const [inputValue, setInputValue] = useState();
   const [allItems, setAllItems] = useState();
-  const [activeItems, setActiveItems] = useState([]);
+  const [activeItems, setActiveItems] = useState(
+    JSON.parse(localStorage.getItem("items") )
+  );
   const [language, setLanguage] = useState("de");
   const [selectableItems, setSelectableItems] = useState();
 
+  //___________INITIALIZING DATA__________
   // Fetch Data and set in on allItems
   useEffect(() => {
     fetchData();
@@ -32,6 +36,21 @@ function App() {
     );
   }, [allItems]);
 
+  //___________SAVE DATA TO LOCAL_________
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(activeItems));
+  }, [activeItems]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("language", JSON.stringify(language));
+  // }, [language]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("items", JSON.stringify(selectableItems));
+  // }, [selectableItems]);
+
+  //___________COMPONENT FUNCTIONS_________
   function handleInputValue(e) {
     const inputLowerCase = e.target.value.toLowerCase();
     setInputValue(inputLowerCase);
@@ -48,12 +67,12 @@ function App() {
         return item.id === e.id ? "" : item;
       })
     );
-    setSelectableItems([...selectableItems,item])
+    setSelectableItems([...selectableItems, item]);
   }
 
   function clearActiveList() {
     setActiveItems([]);
-    //Reset der Suchliste: 
+    //Reset der Suchliste:
     setSelectableItems(
       allItems?.data?.map((item) => {
         return { id: item._id, de: item.name["de"], en: item.name["en"] };
@@ -70,6 +89,7 @@ function App() {
     console.log(selectableItems);
   }
 
+  //______________RENDER____________
   return (
     <div className="App">
       <Header language={language} />
