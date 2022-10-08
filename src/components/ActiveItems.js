@@ -23,10 +23,19 @@ export function ActiveItems({
 
   return (
     <>
-      <Subheader>{language === "en" ? "My List:" : "Meine Liste"}</Subheader>
-      <button onClick={handleClear}>
-        {language === "en" ? "Clear list" : "Liste löschen"}
-      </button>
+      {activeItems.length < 1 ? (
+        ""
+      ) : (
+        <>
+          <Subheader>
+            {language === "en" ? "My List:" : "Meine Liste"}
+          </Subheader>
+          <button onClick={handleClear}>
+            {language === "en" ? "Clear list" : "Liste löschen"}
+          </button>
+        </>
+      )}
+
       <List>
         {activeItems.map((item) => {
           return (

@@ -53,6 +53,12 @@ function App() {
 
   function clearActiveList() {
     setActiveItems([]);
+    //Reset der Suchliste: 
+    setSelectableItems(
+      allItems?.data?.map((item) => {
+        return { id: item._id, de: item.name["de"], en: item.name["en"] };
+      })
+    );
   }
 
   function removeItemFromSelectableItems(item) {
