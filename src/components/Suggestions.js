@@ -33,9 +33,6 @@ export default function Results({
 
   return (
     <Suggestions>
-      {console.log("selectable Items kurz vorm Rendern")}
-      {console.log(selectableItems)}
-
       {filteredShoppingNames?.map((item) => (
         <SuggestionsItem key={Math.random()} onClick={() => clickHandle(item)}>
           {language === "de" ? item.de : item.en}

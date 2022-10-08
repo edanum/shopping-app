@@ -12,18 +12,23 @@ function App() {
   const [language, setLanguage] = useState("de");
   const [selectableItems, setSelectableItems] = useState();
 
-  // Fetch Data & Set State
+  // Fetch Data and set in on allItems
   useEffect(() => {
     fetchData();
     async function fetchData() {
       const url = "https://fetch-me.vercel.app/api/shopping/items";
       const response = await fetch(url);
       const result = await response.json();
-      setSelectableItems(result);
+      setAllItems(result);
     }
   }, []);
 
   
+  useEffect(() => {
+    setSelectableItems(allItems);
+  }, [allItems]);
+  
+
   function handleInputValue(e) {
     const inputLowerCase = e.target.value.toLowerCase();
     setInputValue(inputLowerCase);
