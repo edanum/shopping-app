@@ -29,9 +29,9 @@ export default function Results({ inputValue, addItemToActiveList, language }) {
       return "";
     }
     if (inputValue === item.de) {
-      return item?.de;
+      return item?.[language];
     } else {
-      return item?.de.toLowerCase().includes(inputValue);
+      return item?.[language].toLowerCase().includes(inputValue);
     }
   });
 
@@ -58,17 +58,20 @@ const Suggestions = styled.div`
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  gap: 20px;
+  gap: 10px;
   justify-content: center;
+  
   margin-top: 20px;
 `;
 
 const SuggestionsItem = styled.button`
+  display: flex;
+  align-items: center;
   background-color: lightgray;
   color: black;
-  height: 50px;
+  height: 30px;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
 
   &:hover {
     background-color: #94a9ba;
