@@ -8,14 +8,13 @@ export default function Results({
   selectableItems,
   setSelectableItems,
 }) {
-  //Reduce Data to names only array
-  const shoppingNames = selectableItems?.data?.map((item) => {
-    return { id: item._id, de: item.name["de"], en: item.name["en"] };
-  });
+ 
 
   //Create Suggestions
+ 
+  
 
-  const filteredShoppingNames = shoppingNames?.filter((item) => {
+  const filteredShoppingNames = selectableItems?.filter((item) => {
     if (inputValue === "") {
       return "";
     }

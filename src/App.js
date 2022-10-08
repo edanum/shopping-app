@@ -23,11 +23,15 @@ function App() {
     }
   }, []);
 
-  
+  // set up the data to be shown on filtering in Suggestions.js
   useEffect(() => {
-    setSelectableItems(allItems);
+    //Reduce Data to names only array
+    setSelectableItems(
+      allItems?.data?.map((item) => {
+        return { id: item._id, de: item.name["de"], en: item.name["en"] };
+      })
+    );
   }, [allItems]);
-  
 
   function handleInputValue(e) {
     const inputLowerCase = e.target.value.toLowerCase();
@@ -36,7 +40,7 @@ function App() {
 
   function addItemToActiveList(item) {
     setActiveItems([...activeItems, item]);
-    removeItemFromSearchList(item);
+    removeItemFromSelectableItems(item);
   }
 
   function deleteItemFromActiveList(item) {
@@ -51,9 +55,13 @@ function App() {
     setActiveItems([]);
   }
 
-  function removeItemFromSearchList(item) {
-    // Item: {id: 'c2hvcHBpbmcuaXRlbTo2', de: 'Austernpilze', en: 'Oyster mushrooms'}
-    return console.log(selectableItems.data);
+  function removeItemFromSelectableItems(item) {
+    setSelectableItems(
+      selectableItems.filter((e) => {
+        return e.id !== item.id;
+      })
+    );
+    console.log(selectableItems);
   }
 
   return (
