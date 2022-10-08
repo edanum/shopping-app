@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export function Header() {
-   return <Heading>Shopping List App</Heading>
+export function Header({language}) {
+   return <Heading>{language==="en" ? "Shopping List App" : "Einkauflisten-App"}</Heading>
 }
 
 const Heading = styled.h1`

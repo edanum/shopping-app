@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useState } from "react";
 
-export function SearchBar({ handleInputValue, setLanguage }) {
+export function SearchBar({ handleInputValue, setLanguage, language }) {
+  const [toggledEnglish, setToggleEnglish] = useState(false);
+  const [toggledGerman, setToggleGerman] = useState(true);
+
   function handleSubmit(e) {
     e.preventDefault();
     e.target.reset();
@@ -8,26 +12,48 @@ export function SearchBar({ handleInputValue, setLanguage }) {
 
   function handleLanguageEnglish() {
     setLanguage("en");
+    setToggleEnglish(!toggledEnglish);
+    setToggleGerman(!toggledGerman);
+
     console.log("Language set to english");
   }
 
   function handleLanguageGerman() {
     setLanguage("de");
+    setToggleGerman(!toggledGerman);
+    setToggleEnglish(!toggledEnglish);
+
     console.log("Language set to german");
   }
 
   return (
     <>
       <Bar>
-        <button onClick={handleLanguageEnglish}>EN</button>/
-        <button onClick={handleLanguageGerman}>DE</button>
+        <LanguageSection>
+          <LanguageButton
+            onClick={handleLanguageEnglish}
+            toggled={toggledEnglish}
+          >
+            EN 🇺🇸
+          </LanguageButton>
+          <LanguageButton
+            onClick={handleLanguageGerman}
+            toggled={toggledGerman}
+          >
+            DE 🇩🇪
+          </LanguageButton>
+        </LanguageSection>
         <Form onSubmit={handleSubmit}>
           <Inputfield
             type="text"
             onChange={handleInputValue}
-            placeholder="type item here..."
+            placeholder={
+              language === "en"
+                ? "type item here..."
+                : "Gestenstand hier eingeben..."
+            }
           />
-          <Button type="submit">Add Item</Button>
+          {/* <Button type="submit">Add Item</Button> */}
         </Form>
       </Bar>
     </>
@@ -59,7 +85,18 @@ const Form = styled.form`
 const Inputfield = styled.input`
   width: 370px;
   height: 40px;
-  font-size: 30px;
+  font-size: 20px;
   border-radius: 15px;
   text-align: center;
+`;
+
+const LanguageSection = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
+const LanguageButton = styled.button`
+  border-radius: 10px;
+  background-color: ${(props) => (props.toggled ? "#3848af" : "#e8e4e4")};
+  color: ${(props) => (props.toggled ? "#ffffff" : "#555555")};
 `;

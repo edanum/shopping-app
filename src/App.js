@@ -66,10 +66,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header language={language} />
       <SearchBar
         handleInputValue={handleInputValue}
         setLanguage={setLanguage}
+        language={language}
       />
       <Suggestions
         inputValue={inputValue}

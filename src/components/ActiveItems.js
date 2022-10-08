@@ -19,8 +19,8 @@ export function ActiveItems({
 
   return (
     <>
-      <Subheader>My List:</Subheader>
-      <button onClick={handleClear}>Clear List</button>
+          <Subheader>{language=== "en" ? "My List:" : "Meine Liste"}</Subheader>
+          <button onClick={handleClear}>{language === "en" ? "Clear list" : "Liste löschen"}</button>
       <List>
         {activeItems.map((item) => {
           return (
