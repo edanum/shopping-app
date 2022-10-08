@@ -13,7 +13,7 @@ export function ActiveItems({
   }
 
   function handleToggleShopped(item) {
-    item.toggled === false ? (item.toggled = true) : (item.toggled = false);
+    item.toggled === true ? (item.toggled = false) : (item.toggled = true);
     setActiveItems([...activeItems]);
   }
 
