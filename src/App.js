@@ -45,8 +45,8 @@ function App() {
 
   function deleteItemFromActiveList(item) {
     setActiveItems(
-      activeItems.filter((item) => {
-        return item === item ? "" : item;
+      activeItems.filter((e) => {
+        return item.id === e.id ? "" : item;
       })
     );
   }
@@ -84,6 +84,7 @@ function App() {
         clearActiveList={clearActiveList}
         deleteItemFromActiveList={deleteItemFromActiveList}
         language={language}
+        setActiveItems={setActiveItems}
       />
     </div>
   );

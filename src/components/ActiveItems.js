@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export function ActiveItems({
   activeItems,
+  setActiveItems,
   clearActiveList,
   deleteItemFromActiveList,
   language,
@@ -11,7 +12,11 @@ export function ActiveItems({
     clearActiveList();
   }
 
-  function handleToggle() {}
+  function handleToggle(item) {
+    console.log(item);
+    item.toggled = true;
+    console.log(item);
+  }
 
   function handleDelete(item) {
     deleteItemFromActiveList(item);
@@ -19,14 +24,16 @@ export function ActiveItems({
 
   return (
     <>
-          <Subheader>{language=== "en" ? "My List:" : "Meine Liste"}</Subheader>
-          <button onClick={handleClear}>{language === "en" ? "Clear list" : "Liste löschen"}</button>
+      <Subheader>{language === "en" ? "My List:" : "Meine Liste"}</Subheader>
+      <button onClick={handleClear}>
+        {language === "en" ? "Clear list" : "Liste löschen"}
+      </button>
       <List>
         {activeItems.map((item) => {
           return (
-            <ListItem key={item.id} onClick={handleToggle}>
+            <ListItem key={item.id} onClick={() => handleToggle(item)}>
               {language === "de" ? item.de : item.en}
-              <DeleteButton onClick={handleDelete}>X</DeleteButton>
+              <DeleteButton onClick={() => handleDelete(item)}>X</DeleteButton>
             </ListItem>
           );
         })}
@@ -61,7 +68,7 @@ const ListItem = styled.button`
   list-style: none;
   width: 90%;
   margin: 0px;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px;
   font-size: 24px;
 `;
