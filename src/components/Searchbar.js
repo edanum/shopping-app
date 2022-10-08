@@ -63,6 +63,7 @@ export function SearchBar({ handleInputValue, setLanguage, language }) {
 const Bar = styled.div`
   display: flex;
   gap: 20px;
+  width: 100%;
   justify-content: center;
   align-items: center;
 `;
@@ -78,12 +79,13 @@ const Button = styled.button`
 const Form = styled.form`
   display: flex;
   gap: 20px;
+  width: 100%;
   justify-content: center;
   align-items: center;
 `;
 
 const Inputfield = styled.input`
-  width: 370px;
+  width: 100%;
   height: 40px;
   font-size: 20px;
   border-radius: 15px;

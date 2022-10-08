@@ -1,9 +1,13 @@
+
 .App {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  align-items: center;
   background-color: rgb(223, 223, 223);
-  height: 100vh;
   top: 0px;
+  padding: 20px 20px 20px 20px;
+  margin: 0px;
 }
 
 .App-logo {

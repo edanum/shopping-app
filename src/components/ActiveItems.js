@@ -66,16 +66,16 @@ const Subheader = styled.h2`
 `;
 
 const List = styled.ul`
-  box-sizing: content-box;
+  
   display: flex;
   flex-direction: column;
   gap: 10px;
   justify-content: center;
-  align-items: flex-start;
-  width: 360px;
-  margin: auto;
+  align-items: center;
+  width: 80%;
   padding: 20px 20px 20px 20px;
   border-radius: 20px;
+  
 `;
 
 const ListItem = styled.button`
@@ -87,7 +87,7 @@ const ListItem = styled.button`
   list-style: none;
   width: 100%;
   margin: 0px;
-  padding: 10px;
+  padding: 10px 10px 10px 20px;
   border-radius: 10px;
   font-size: 24px;
   font-style: ${(props) => (props.toggled ? "italic" : "normal")};
