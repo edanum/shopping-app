@@ -15,7 +15,7 @@ export default function Results({
   const filteredShoppingNames = selectableItems?.filter((item) => {
     return inputValue === ""
       ? ""
-      : inputValue === item.de
+      : inputValue === item?.[language]
       ? item?.[language]
       : item?.[language].toLowerCase().includes(inputValue);
   });

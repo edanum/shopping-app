@@ -16,10 +16,7 @@ function App() {
   const [activeItems, setActiveItems] = useLocalStorage("activeItems", []);
   const [language, setLanguage] = useLocalStorage("language", "de");
   const [selectableItems, setSelectableItems] = useState();
-  const [recentItems, setRecentItems] = useState([
-    { id: 1, de: "Test", en: "test" },
-    { id: 2, de: "Fest", en: "test" },
-  ]);
+  const [recentItems, setRecentItems] = useState([]);
 
   //___________INITIALIZING DATA__________
   // Fetch Data and set in on allItems
@@ -50,18 +47,22 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("language", JSON.stringify(language));
-    console.log("SPRACHE GESPEICHERT");
   }, [language]);
 
   //___________COMPONENT FUNCTIONS_________
-  function handleInputValue(e) {
-    const inputLowerCase = e.target.value.toLowerCase();
-    setInputValue(inputLowerCase);
-  }
+
 
   function addItemToActiveList(item) {
     setActiveItems([...activeItems, item]);
-    removeItemFromSelectableItems(item);
+    removeItemFromSelectableItems(item); // Remove Item out of selectable
+    setInputValue("");
+  }
+
+  function manageRecentItems(item) {
+    console.log(recentItems);
+    recentItems.includes(item)
+      ? console.log("Item bereits drin")
+      : setRecentItems(item, ...recentItems);
   }
 
   function deleteItemFromActiveList(item) {
@@ -89,7 +90,6 @@ function App() {
         return e.id !== item.id;
       })
     );
-    console.log(selectableItems);
   }
 
   //______________RENDER____________
@@ -98,9 +98,10 @@ function App() {
       <GlobalStyle />
       <Header language={language} />
       <SearchBar
-        handleInputValue={handleInputValue}
         setLanguage={setLanguage}
         language={language}
+        setInputValue={setInputValue}
+        inputValue={inputValue}
       />
       <Suggestions
         inputValue={inputValue}
