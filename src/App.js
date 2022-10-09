@@ -49,13 +49,20 @@ function App() {
     localStorage.setItem("language", JSON.stringify(language));
   }, [language]);
 
+  
   //___________COMPONENT FUNCTIONS_________
 
-
   function addItemToActiveList(item) {
-    setActiveItems([...activeItems, item]);
-    removeItemFromSelectableItems(item); // Remove Item out of selectable
-    setInputValue("");
+    if (!activeItems.includes(item)) {
+      setActiveItems([...activeItems, item]);
+      removeItemFromSelectableItems(item); // Remove Item out of selectable
+      setInputValue("");
+      recentItems.includes(item)
+        ? console.log("REDUNDANT")
+        : setRecentItems([item, ...recentItems]);
+    } else {
+      alert("Das Item befindet sich bereits in deiner Liste");
+    }
   }
 
   function manageRecentItems(item) {
