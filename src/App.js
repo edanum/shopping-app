@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 import { ActiveItems } from "./components/ActiveItems";
 import useLocalStorage from "./hooks/useLocalStorage";
 import GlobalStyle from "./globalStyles";
+import { RecentItems } from "./components/RecentItems";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [activeItems, setActiveItems] = useLocalStorage("activeItems",[]);
   const [language, setLanguage] = useLocalStorage("language","de");
   const [selectableItems, setSelectableItems] = useState();
+  const [recentItems, setRecentItems] = useState();
 
   //___________INITIALIZING DATA__________
   // Fetch Data and set in on allItems
@@ -97,6 +99,9 @@ function App() {
         handleInputValue={handleInputValue}
         setLanguage={setLanguage}
         language={language}
+      />
+      <RecentItems
+      recentItems = {recentItems}
       />
       <Suggestions
         inputValue={inputValue}
