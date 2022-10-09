@@ -1,3 +1,5 @@
+//___________IMPORTS___________
+
 import "./App.css";
 import Suggestions from "./components/Suggestions";
 import { useEffect, useState } from "react";
@@ -6,17 +8,18 @@ import { Header } from "./components/Header";
 import { ActiveItems } from "./components/ActiveItems";
 import useLocalStorage from "./hooks/useLocalStorage";
 import GlobalStyle from "./globalStyles";
-import { RecentItems } from "./components/RecentItems";
-
 
 function App() {
   //___________ STATES__________
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState("");
   const [allItems, setAllItems] = useState();
-  const [activeItems, setActiveItems] = useLocalStorage("activeItems",[]);
-  const [language, setLanguage] = useLocalStorage("language","de");
+  const [activeItems, setActiveItems] = useLocalStorage("activeItems", []);
+  const [language, setLanguage] = useLocalStorage("language", "de");
   const [selectableItems, setSelectableItems] = useState();
-  const [recentItems, setRecentItems] = useState();
+  const [recentItems, setRecentItems] = useState([
+    { id: 1, de: "Test", en: "test" },
+    { id: 2, de: "Fest", en: "test" },
+  ]);
 
   //___________INITIALIZING DATA__________
   // Fetch Data and set in on allItems
@@ -47,9 +50,8 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("language", JSON.stringify(language));
-    console.log("SPRACHE GESPEICHERT")
+    console.log("SPRACHE GESPEICHERT");
   }, [language]);
-
 
   //___________COMPONENT FUNCTIONS_________
   function handleInputValue(e) {
@@ -93,22 +95,19 @@ function App() {
   //______________RENDER____________
   return (
     <div className="App">
-      <GlobalStyle/>
+      <GlobalStyle />
       <Header language={language} />
       <SearchBar
         handleInputValue={handleInputValue}
         setLanguage={setLanguage}
         language={language}
       />
-      <RecentItems
-      recentItems = {recentItems}
-      />
       <Suggestions
         inputValue={inputValue}
         addItemToActiveList={addItemToActiveList}
         language={language}
         selectableItems={selectableItems}
-        setSelectableItems={setSelectableItems}
+        recentItems={recentItems}
       />
       <ActiveItems
         activeItems={activeItems}
