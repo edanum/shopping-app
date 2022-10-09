@@ -16,7 +16,7 @@ function App() {
   const [activeItems, setActiveItems] = useLocalStorage("activeItems", []);
   const [language, setLanguage] = useLocalStorage("language", "de");
   const [selectableItems, setSelectableItems] = useState();
-  const [recentItems, setRecentItems] = useState([]);
+  const [recentItems, setRecentItems] = useLocalStorage("recentItems",[]);
 
   //___________INITIALIZING DATA__________
   // Fetch Data and set in on allItems
@@ -49,6 +49,9 @@ function App() {
     localStorage.setItem("language", JSON.stringify(language));
   }, [language]);
 
+  useEffect(() =>{
+    localStorage.setItem("recentItems", JSON.stringify(recentItems));
+  },[recentItems])
   
   //___________COMPONENT FUNCTIONS_________
 
