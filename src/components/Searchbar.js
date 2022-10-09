@@ -29,6 +29,14 @@ export function SearchBar({ handleInputValue, setLanguage, language }) {
   return (
     <>
       <Bar>
+        <Form onSubmit={handleSubmit}>
+          <Inputfield
+            type="text"
+            onChange={handleInputValue}
+            placeholder={language === "en" ? "search..." : "Suche..."}
+          />
+          {/* <Button type="submit">Add Item</Button> */}
+        </Form>
         <LanguageSection>
           <LanguageButton
             onClick={handleLanguageEnglish}
@@ -43,18 +51,6 @@ export function SearchBar({ handleInputValue, setLanguage, language }) {
             DE 🇩🇪
           </LanguageButton>
         </LanguageSection>
-        <Form onSubmit={handleSubmit}>
-          <Inputfield
-            type="text"
-            onChange={handleInputValue}
-            placeholder={
-              language === "en"
-                ? "type item here..."
-                : "Gestenstand hier eingeben..."
-            }
-          />
-          {/* <Button type="submit">Add Item</Button> */}
-        </Form>
       </Bar>
     </>
   );
@@ -80,7 +76,7 @@ const Form = styled.form`
   display: flex;
   gap: 20px;
   width: 100%;
-  max-width: 700px;
+  max-width: 875px;
   justify-content: center;
   align-items: center;
 `;
@@ -91,6 +87,8 @@ const Inputfield = styled.input`
   font-size: 20px;
   border-radius: 15px;
   text-align: center;
+  text-align: left;
+  padding-left: 20px;
   
 `;
 
@@ -101,6 +99,6 @@ const LanguageSection = styled.section`
 
 const LanguageButton = styled.button`
   border-radius: 10px;
-  background-color: ${(props) => (props.toggled ? "#3848af" : "#e8e4e4")};
+  background-color: ${(props) => (props.toggled ? "#6c82b5" : "#e8e4e4")};
   color: ${(props) => (props.toggled ? "#ffffff" : "#555555")};
 `;

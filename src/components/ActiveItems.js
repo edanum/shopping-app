@@ -29,10 +29,10 @@ export function ActiveItems({
         <>
           <Subheader>
             {language === "en" ? "My List:" : "Meine Einkaufsliste"}
+            <button onClick={handleClear}>
+              {language === "en" ? "Clear list" : "Liste löschen"}
+            </button>
           </Subheader>
-          <button onClick={handleClear}>
-            {language === "en" ? "Clear list" : "Liste löschen"}
-          </button>
         </>
       )}
 
@@ -63,8 +63,13 @@ export function ActiveItems({
 }
 
 const Subheader = styled.h2`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   font-size: 30px;
   margin-top: 50px;
+  width: 72%;
 `;
 
 const List = styled.ul`

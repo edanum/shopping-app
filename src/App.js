@@ -5,12 +5,14 @@ import { SearchBar } from "./components/Searchbar";
 import { Header } from "./components/Header";
 import { ActiveItems } from "./components/ActiveItems";
 import useLocalStorage from "./hooks/useLocalStorage";
+import GlobalStyle from "./globalStyles";
+
 
 function App() {
   //___________ STATES__________
   const [inputValue, setInputValue] = useState();
   const [allItems, setAllItems] = useState();
-  const [activeItems, setActiveItems] = useLocalStorage("activeItems",[]  );
+  const [activeItems, setActiveItems] = useLocalStorage("activeItems",[]);
   const [language, setLanguage] = useLocalStorage("language","de");
   const [selectableItems, setSelectableItems] = useState();
 
@@ -46,9 +48,6 @@ function App() {
     console.log("SPRACHE GESPEICHERT")
   }, [language]);
 
-  useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(selectableItems));
-  }, [selectableItems]);
 
   //___________COMPONENT FUNCTIONS_________
   function handleInputValue(e) {
@@ -92,6 +91,7 @@ function App() {
   //______________RENDER____________
   return (
     <div className="App">
+      <GlobalStyle/>
       <Header language={language} />
       <SearchBar
         handleInputValue={handleInputValue}
