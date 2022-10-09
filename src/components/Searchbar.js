@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-export function SearchBar({ handleInputValue, setLanguage, language }) {
+export function SearchBar({ setInputValue, setLanguage, language, inputValue }) {
   const [toggledEnglish, setToggleEnglish] = useState(false);
   const [toggledGerman, setToggleGerman] = useState(true);
 
@@ -14,16 +14,12 @@ export function SearchBar({ handleInputValue, setLanguage, language }) {
     setLanguage("en");
     setToggleEnglish(true);
     setToggleGerman(false);
-
-    console.log("Language set to english");
   }
 
   function handleLanguageGerman() {
     setLanguage("de");
     setToggleGerman(true);
     setToggleEnglish(false);
-
-    console.log("Language set to german");
   }
 
   return (
@@ -32,7 +28,10 @@ export function SearchBar({ handleInputValue, setLanguage, language }) {
         <Form onSubmit={handleSubmit}>
           <Inputfield
             type="text"
-            onChange={handleInputValue}
+            value={inputValue}
+            onChange={(event) =>
+              setInputValue(event.target.value.toLowerCase())
+            }
             placeholder={language === "en" ? "search..." : "Suche..."}
           />
           {/* <Button type="submit">Add Item</Button> */}
@@ -89,7 +88,6 @@ const Inputfield = styled.input`
   text-align: center;
   text-align: left;
   padding-left: 20px;
-  
 `;
 
 const LanguageSection = styled.section`

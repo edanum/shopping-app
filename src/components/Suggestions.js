@@ -1,3 +1,5 @@
+//___________IMPORTS & PROPS___________
+
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 
@@ -6,40 +8,48 @@ export default function Results({
   addItemToActiveList,
   language,
   selectableItems,
-  setSelectableItems,
+  recentItems,
 }) {
- 
-
-  //Create Suggestions
- 
-  
+  //______FILTER SELECATABLE ITEMS_______
 
   const filteredShoppingNames = selectableItems?.filter((item) => {
-    if (inputValue === "") {
-      return "";
-    }
-    if (inputValue === item.de) {
-      return item?.[language];
-    } else {
-      return item?.[language].toLowerCase().includes(inputValue);
-    }
+    return inputValue === ""
+      ? ""
+      : inputValue === item?.[language]
+      ? item?.[language]
+      : item?.[language].toLowerCase().includes(inputValue);
   });
 
-  // Handle Click on Suggestions
+  //______ITEM CLICK HANDLER_______
   function clickHandle(item) {
     addItemToActiveList(item);
   }
 
+  //______________RENDER____________
   return (
     <Suggestions>
-      {filteredShoppingNames?.map((item) => (
-        <SuggestionsItem key={Math.random()} onClick={() => clickHandle(item)}>
-          {language === "de" ? item.de : item.en}
-        </SuggestionsItem>
-      ))}
+      {inputValue === ""
+        ? recentItems?.map((item) => (
+            <SuggestionsItem
+              key={Math.random()}
+              onClick={() => clickHandle(item)}
+            >
+              {language === "de" ? item.de : item.en}
+            </SuggestionsItem>
+          ))
+        : filteredShoppingNames?.map((item) => (
+            <SuggestionsItem
+              key={Math.random()}
+              onClick={() => clickHandle(item)}
+            >
+              {language === "de" ? item.de : item.en}
+            </SuggestionsItem>
+          ))}
     </Suggestions>
   );
 }
+
+//______________CSS____________
 
 const Suggestions = styled.div`
   display: flex;

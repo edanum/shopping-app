@@ -39,7 +39,7 @@ export function ActiveItems({
       <List>
         {activeItems.map((item) => {
           return (
-            <ListItemContainer toggled={item.toggled}>
+            <ListItemContainer key={Math.random()} toggled={item.toggled}>
               <ListItem
                 key={item.id}
                 onClick={() => handleToggleShopped(item)}
