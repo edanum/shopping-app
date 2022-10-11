@@ -17,7 +17,8 @@ export default function Results({
       ? ""
       : inputValue === item?.[language]
       ? item?.[language]
-      : item?.[language].toLowerCase().includes(inputValue);
+      : (item?.[language].toLowerCase().includes(inputValue),
+        console.log("test"));
   });
 
   //______ITEM CLICK HANDLER_______
@@ -30,18 +31,12 @@ export default function Results({
     <Suggestions>
       {inputValue === ""
         ? recentItems?.map((item) => (
-            <SuggestionsItem
-              key={Math.random()}
-              onClick={() => clickHandle(item)}
-            >
+            <SuggestionsItem key={item.id} onClick={() => clickHandle(item)}>
               {language === "de" ? item.de : item.en}
             </SuggestionsItem>
           ))
         : filteredShoppingNames?.map((item) => (
-            <SuggestionsItem
-              key={Math.random()}
-              onClick={() => clickHandle(item)}
-            >
+            <SuggestionsItem key={item.id} onClick={() => clickHandle(item)}>
               {language === "de" ? item.de : item.en}
             </SuggestionsItem>
           ))}

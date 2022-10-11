@@ -5,7 +5,7 @@ export function RecentItems({ recentItems, language }) {
     <Container>
       {recentItems.map((item) => {
           return (
-            <RecentList>
+            <RecentList key={item.id}>
               <RecentItem>
                 <div>{language === "de" ? item.de : item.en}</div>
               </RecentItem>
